@@ -14,14 +14,14 @@ public class LeadsDBHelper extends BaseDBhandler {
     public synchronized long addLeads(LeadsEntity entity)throws Exception{
         long rid = 0;
 
-        if(null != entity && !checkphone(entity.getUserphone())){
+        if(null != entity && !checkphone(entity.getUserphone(),entity.getUsername())){
             long leads_id = super.getUniqueID();
 
-            boolean f = LeadsDBHelper.stance.checkphone(entity.getUserphone(),entity.getUsername());
-            if(f){
-                System.out.println("got one ,break "+entity.getUserphone()+" "+entity.getUsername());
-                return rid;
-            }
+//            boolean f = LeadsDBHelper.stance.checkphone(entity.getUserphone(),entity.getUsername());
+//            if(f){
+//                System.out.println("got one ,break "+entity.getUserphone()+" "+entity.getUsername());
+//                return rid;
+//            }
 
 
             entity.setId(leads_id);

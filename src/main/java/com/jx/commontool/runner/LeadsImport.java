@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  * Created by xiaowei on 17/7/24.
  */
 public class LeadsImport {
-    private static ExecutorService es = Executors.newFixedThreadPool(6);
+    private static ExecutorService es = Executors.newFixedThreadPool(10);
     public static void main(String[] args){
         LeadsImport leadsImport = new LeadsImport();
         leadsImport.runNophoneorrepeat();
@@ -77,7 +77,7 @@ public class LeadsImport {
         if(array != null && array.size() > 0){
             for(int i=0,c=array.size();i<c;i++){
                 LeadsEntity led = tranceNophoneJsonToentit(array.getJSONObject(i));
-                if(null != led){
+                if(null != led && led.getUsername() != null && !"".equals(led.getUsername())){
                     list.add(led);
                 }
             }
@@ -102,7 +102,7 @@ public class LeadsImport {
     public LeadsEntity tranceNophoneJsonToentit(JSONObject jsonObject){
         LeadsEntity leadsEntity = new LeadsEntity();
         if(null != jsonObject){
-            leadsEntity.setComment("2017-08-07导入,无手机号导入");
+            leadsEntity.setComment("2017-08-08导入,无手机号导入");
             leadsEntity.setIntentbusiness(jsonObject.getString("yc_reason"));
             leadsEntity.setLibrary_type(0);
             leadsEntity.setIntention_code(0);
@@ -112,6 +112,7 @@ public class LeadsImport {
             leadsEntity.setStatus(0);
             leadsEntity.setCity_id(1);
             leadsEntity.setUsername(jsonObject.getString("enter_name"));
+            leadsEntity.setSale_attribute(2);
 
             int area_id = 101;
 
